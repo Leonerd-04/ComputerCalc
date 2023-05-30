@@ -8,15 +8,16 @@
 
 #include <vector>
 #include "function.h"
+#include <sstream>
 
 class Polynomial : public Function {
     std::vector<double> coefficients;
 
     public:
 
-    Polynomial(const std::vector<double> coefficients){
-        this->coefficients = coefficients;
-    }
+    Polynomial(const std::vector<double> coefficients): coefficients(coefficients) {}
+
+    Polynomial(std::initializer_list<double> list) : coefficients(list){}
 
     double evaluate(double x) const override{
         double y = 0;

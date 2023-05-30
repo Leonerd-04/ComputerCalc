@@ -1,6 +1,10 @@
+
 #include <iostream>
+#include "functions/polynomial.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+    Polynomial p({1, 2, 3, 4});
+
+    std::cout << p << std::endl;
+    std::cout << p.differentiate();
 }
