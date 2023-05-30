@@ -9,15 +9,22 @@
 #include <string>
 
 class Function {
-    Function& input;
-    virtual double evaluate() const = 0;
-    virtual Function& differentiate() const = 0;
-    virtual std::string display() const = 0;
-
 public:
+    virtual double evaluate(double x) const = 0;
+    virtual std::string to_string() const = 0;
+    virtual Function& differentiate() const = 0;
+
     Function() = default;
 
+    double operator()(double x) const {
+        return evaluate(x);
+    }
 };
+
+std::ostream& operator<<(std::ostream& os, const Function& function){
+    os << function.to_string();
+    return os;
+}
 
 
 #endif //FUNCTIONS_FUNCTION_H
