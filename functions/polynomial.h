@@ -51,8 +51,8 @@ class Polynomial : public Function {
 
             result << (c > 0 ? " + " : " - ");
 
-            // Don't display 1x^n, just x^n.
-            if(c != 1 && c != -1) {
+            // Don't display 1x^n, just x^n. Do display 1
+            if((c != 1 && c != -1) || i == 0) {
                 result << abs(c); // abs(c) is used because we already accounted for negatives above
             }
 
