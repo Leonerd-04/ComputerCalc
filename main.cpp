@@ -8,4 +8,5 @@ int main() {
 
     std::cout << q.to_string(&p) << std::endl;
     std::cout << p.differentiate();
+    std::cout << p.differentiate();
 }
