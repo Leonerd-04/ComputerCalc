@@ -7,25 +7,39 @@
 
 
 #include "../function.h"
+#include "addition.h"
 
 // Multiplies two functions
-class MultiplyFunction : public Function{
+class Multiply : public Function{
     Function* f;
     Function* g;
 
 public:
+    Multiply(Function* f, Function* g) :f(f->clone()), g(g->clone()){}
+
     double evaluate(double x) const override{
         return (*f)(x) * (*g)(x);
     }
 
-    virtual std::string to_string(Function* func) const = 0;
-    virtual Function& differentiate() const = 0;
+    std::string to_string(Function* func) const override {
+        return "(" + f->to_string() + ")(" + g->to_string() +  ")";
+    }
 
-    virtual Function* clone() const = 0;
+    // Product rule: (fg)' = f'g + fg'
+    Addition& differentiate() const override{
+        Addition a = Multiply(&f->differentiate(), g) + Multiply(f, &g->differentiate());
+        return a;
+    }
 
-};
+    Multiply(const Multiply& other){
+        this->f = other.f->clone();
+        this->g = other.g->clone();
 
-class MultiplyScalar{
+    }
+
+    Multiply* clone() const override {
+        return new Multiply(*this);
+    }
 
 };
 
