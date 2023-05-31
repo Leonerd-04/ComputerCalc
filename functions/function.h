@@ -8,17 +8,22 @@
 
 #include <string>
 
+class Of;
+
 class Function {
 public:
     virtual double evaluate(double x) const = 0;
     virtual std::string to_string() const = 0;
     virtual Function& differentiate() const = 0;
 
-    Function() = default;
+    virtual Function* create() const = 0;
+    virtual Function* clone() const = 0;
 
     double operator()(double x) const {
         return evaluate(x);
     }
+
+    Of operator()(const Function& inner) const;
 };
 
 std::ostream& operator<<(std::ostream& os, const Function& function){
