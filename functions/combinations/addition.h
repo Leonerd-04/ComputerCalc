@@ -12,30 +12,28 @@ Addition& operator+(const Function& f, const Function& g);
 
 // Adds two functions together
 class Addition : public Function{
-    Function* f;
-    Function* g;
+    Function& f;
+    Function& g;
 
 public:
 
-    Addition(const Function* f, const Function* g): f(f->clone()), g(g->clone()){}
+    Addition(const Function& f, const Function& g): f(*f.clone()), g(*g.clone()){}
 
     double evaluate(double x) const override {
-        return (*f)(x) + (*g)(x);
+        return f(x) + g(x);
     }
 
     std::string to_string(Function* func) const override {
-        return f->to_string(func) + " + " + g->to_string(func);
+        return f.to_string(func) + " + " + g.to_string(func);
     }
 
     Addition& differentiate() const override {
-        static Addition derivative = f->differentiate() + g->differentiate();
+        static Addition derivative = f.differentiate() + g.differentiate();
         return derivative;
     }
 
 
-    Addition(const Addition& other){
-        this->f = other.f->clone();
-        this->g = other.g->clone();
+    Addition(const Addition& other): f(*other.f.clone()), g(*other.g.clone()){
     }
 
     Function* clone() const override{
@@ -45,7 +43,7 @@ public:
 
 
 Addition& operator+(const Function& f, const Function& g){
-    return *new Addition(&f, &g);
+    return *new Addition(f, g);
 }
 
 
