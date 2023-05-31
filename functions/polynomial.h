@@ -29,7 +29,7 @@ class Polynomial : public Function {
         return y;
     }
 
-    Function& differentiate() const override{
+    Polynomial& differentiate() const override{
         std::vector<double> newCoef;
 
         for(int i = 1; i < coefficients.size(); i++){
