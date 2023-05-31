@@ -36,8 +36,7 @@ class Polynomial : public Function {
             newCoef.push_back(coefficients[i] * i);
         }
 
-        static Polynomial p(newCoef);
-        return p;
+        return *new Polynomial(newCoef);
     }
 
     std::string to_string(Function* func) const override{

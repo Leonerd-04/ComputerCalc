@@ -31,8 +31,7 @@ public:
 
     // Product rule: (fg)' = f'g + fg'
     Addition& differentiate() const override{
-        static Addition derivative = f.differentiate() * g + f * g.differentiate();
-        return derivative;
+        return f.differentiate()*g + f*g.differentiate();
     }
 
     Multiply(const Multiply& other): f(*other.f.clone()), g(*other.g.clone()){}

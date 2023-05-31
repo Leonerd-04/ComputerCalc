@@ -28,8 +28,7 @@ public:
     }
 
     Addition& differentiate() const override {
-        static Addition derivative = f.differentiate() + g.differentiate();
-        return derivative;
+        return f.differentiate() + g.differentiate();
     }
 
 
