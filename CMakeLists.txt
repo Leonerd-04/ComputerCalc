@@ -3,4 +3,4 @@ project(Functions)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Functions main.cpp functions/function.h functions/polynomial.h functions/combinations/of.h functions/combinations/multiply.h functions/combinations/addition.h functions/constant.h functions/exponential.h functions/Ln.h)
+add_executable(Functions main.cpp functions/function.h functions/polynomial.h functions/combinations/of.h functions/combinations/multiply.h functions/combinations/addition.h functions/constant.h functions/exponential.h functions/ln.h)
