@@ -8,34 +8,28 @@
 
 #include "../function.h"
 
-// Takes one function's output of another
-// Like outer(inner(x))
+// Nested functions
+// Represents outer of inner
 class Of : public Function {
-    Function* outer;
-    Function* inner;
+    Function& outer;
+    Function& inner;
 
 public:
-    Of(Function* outer, Function* inner) {
-        this->outer = outer;
-        this->inner = inner;
-    }
+    Of(const Function& outer, const Function& inner): outer(*outer.clone()), inner(*inner.clone()) {}
 
     double evaluate(double x) const override {
-        return outer->evaluate(inner->evaluate(x));
+        return outer(inner(x));
     }
 
     std::string to_string(Function* func) const override{
-        return outer->to_string(inner);
+        return outer.to_string(&inner);
     }
 
-    Function& differentiate() const {
-        return outer->differentiate(); // We cannot properly differentiate until we can multiply functions
+    Function& differentiate() const override{
+        return outer.differentiate(); // We cannot properly differentiate until we can multiply functions
     }
 
-    Of(const Of& other){
-        this->outer = other.outer;
-        this->inner = other.inner;
-    }
+    Of(const Of& other): outer(*other.outer.clone()), inner(*other.inner.clone()){}
 
     Of* clone() const override{
         return new Of(*this);
@@ -44,6 +38,6 @@ public:
 };
 
 Of Function::operator()(const Function& inner) const{
-    return Of(this->clone(), inner.clone());
+    return {*this->clone(), *inner.clone()}; // Braces substitute a constructor; Braced initializer
 }
 #endif //FUNCTIONS_OF_H
