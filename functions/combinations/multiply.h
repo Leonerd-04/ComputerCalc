@@ -11,31 +11,27 @@
 
 // Multiplies two functions
 class Multiply : public Function{
-    Function* f;
-    Function* g;
+    Function& f;
+    Function& g;
 
 public:
-    Multiply(Function* f, Function* g) :f(f->clone()), g(g->clone()){}
+    Multiply(const Function& f, const Function& g) : f(*f.clone()), g(*g.clone()){}
 
     double evaluate(double x) const override{
-        return (*f)(x) * (*g)(x);
+        return f(x) * g(x);
     }
 
     std::string to_string(Function* func) const override {
-        return "(" + f->to_string() + ")(" + g->to_string() +  ")";
+        return "(" + f.to_string() + ")(" + g.to_string() +  ")";
     }
 
     // Product rule: (fg)' = f'g + fg'
     Addition& differentiate() const override{
-        Addition a = Multiply(&f->differentiate(), g) + Multiply(f, &g->differentiate());
+        Addition a = Multiply(f.differentiate(), g) + Multiply(f, g.differentiate());
         return a;
     }
 
-    Multiply(const Multiply& other){
-        this->f = other.f->clone();
-        this->g = other.g->clone();
-
-    }
+    Multiply(const Multiply& other): f(*other.f.clone()), g(*other.g.clone()){}
 
     Multiply* clone() const override {
         return new Multiply(*this);
