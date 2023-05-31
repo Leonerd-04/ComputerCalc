@@ -6,6 +6,9 @@
 #define FUNCTIONS_ADDITION_H
 
 #include "../function.h"
+class Addition;
+
+Addition& operator+(const Function& f, const Function& g);
 
 // Adds two functions together
 class Addition : public Function{
@@ -21,17 +24,18 @@ public:
     }
 
     std::string to_string(Function* func) const override {
-        return f->to_string(func)  + " + " + g->to_string(func);
+        return f->to_string(func) + " + " + g->to_string(func);
     }
 
     Addition& differentiate() const override {
-        return *new Addition(&f->differentiate(), &g->differentiate());
+        static Addition derivative = f->differentiate() + g->differentiate();
+        return derivative;
     }
 
 
     Addition(const Addition& other){
         this->f = other.f->clone();
-        this->g = other.g->clone()
+        this->g = other.g->clone();
     }
 
     Function* clone() const override{
@@ -40,7 +44,7 @@ public:
 };
 
 
-Addition operator+(const Function& f, const Function& g){
+Addition& operator+(const Function& f, const Function& g){
     return *new Addition(&f, &g);
 }
 
