@@ -6,7 +6,7 @@
 #define FUNCTIONS_OF_H
 
 
-#include "function.h"
+#include "../function.h"
 
 // Takes one function's output of another
 // Like outer(inner(x))
