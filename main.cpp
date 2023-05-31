@@ -5,11 +5,11 @@
 #include "functions/combinations/of.h"
 
 int main() {
-    Polynomial p({1, 2, 3, 4});
+    Polynomial p({10, 3, 4});
     Polynomial q({0, 0, 2});
 
-    std::cout << q.to_string(&p) << std::endl;
-    std::cout << p.differentiate();
+
+    std::cout << "The derivative of " << q(p) << " is " << q(p).differentiate() << std::endl;
 
     Exponential ex; // Default exponential is e^x
 
