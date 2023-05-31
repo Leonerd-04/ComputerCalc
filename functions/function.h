@@ -12,7 +12,7 @@ class Of;
 
 class Function {
 public:
-    virtual double evaluate(double x) const = 0;
+    virtual constexpr double evaluate(double x) const = 0;
     virtual std::string to_string(Function* func) const = 0;
     virtual Function& differentiate() const = 0;
 
