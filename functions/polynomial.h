@@ -41,7 +41,13 @@ class Polynomial : public Function {
         return p;
     }
 
-    std::string to_string() const override{
+    std::string to_string(Function* func) const override{
+        std::string x = "x";
+
+        if(func != nullptr){
+            x = "(" + func->to_string() + ")";
+        }
+
         std::stringstream result;
         double c;
         for(int i = 0; i < coefficients.size(); i++){
@@ -58,7 +64,7 @@ class Polynomial : public Function {
 
             if(i == 0) continue; // Don't display cx^0, just c
 
-            result << "x";
+            result << x;
 
             // Don't display x^1, just x
             if(i != 1){

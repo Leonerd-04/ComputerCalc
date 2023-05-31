@@ -13,11 +13,16 @@ class Of;
 class Function {
 public:
     virtual double evaluate(double x) const = 0;
-    virtual std::string to_string() const = 0;
+    virtual std::string to_string(Function* func) const = 0;
     virtual Function& differentiate() const = 0;
 
-    virtual Function* create() const = 0;
-    virtual Function* clone() const = 0;
+    // virtual Function* create() const = 0;
+    // virtual Function* clone() const = 0;
+
+    // Essentially gives to_string a default value
+    std::string to_string() const {
+        return to_string(nullptr);
+    }
 
     double operator()(double x) const {
         return evaluate(x);
