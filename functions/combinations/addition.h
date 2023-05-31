@@ -40,4 +40,9 @@ public:
 };
 
 
+Addition operator+(const Function& f, const Function& g){
+    return *new Addition(&f, &g);
+}
+
+
 #endif //FUNCTIONS_ADDITION_H
