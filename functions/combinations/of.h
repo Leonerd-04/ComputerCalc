@@ -7,6 +7,7 @@
 
 
 #include "../function.h"
+#include "multiply.h"
 
 // Nested functions
 // Represents outer of inner
@@ -25,8 +26,9 @@ public:
         return outer.to_string(&inner);
     }
 
-    Function& differentiate() const override{
-        return outer.differentiate(); // We cannot properly differentiate until we can multiply functions
+    // Chain rule: (f(g(x)))' = g'(x) * f'(g(x))
+    Multiply& differentiate() const override{
+        return inner.differentiate() * outer.differentiate()(inner);
     }
 
     Of(const Of& other): outer(*other.outer.clone()), inner(*other.inner.clone()){}
