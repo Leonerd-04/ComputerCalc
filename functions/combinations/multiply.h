@@ -11,7 +11,7 @@
 
 class Multiply;
 
-Multiply& operator*(Function& f, Function& g);
+Multiply& operator*(const Function& f, const Function& g);
 
 // Multiplies two functions
 class Multiply : public Function{
@@ -31,7 +31,7 @@ public:
 
     // Product rule: (fg)' = f'g + fg'
     Addition& differentiate() const override{
-        return f.differentiate()*g + f*g.differentiate();
+        return f.differentiate() * g  +  f * g.differentiate();
     }
 
     Multiply(const Multiply& other): f(*other.f.clone()), g(*other.g.clone()){}
@@ -42,5 +42,8 @@ public:
 
 };
 
+Multiply& operator*(const Function& f, const Function& g){
+    return *new Multiply(f, g);
+}
 
 #endif //FUNCTIONS_MULTIPLY_H
