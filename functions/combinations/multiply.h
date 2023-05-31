@@ -9,6 +9,10 @@
 #include "../function.h"
 #include "addition.h"
 
+class Multiply;
+
+Multiply& operator*(Function& f, Function& g);
+
 // Multiplies two functions
 class Multiply : public Function{
     Function& f;
@@ -27,8 +31,8 @@ public:
 
     // Product rule: (fg)' = f'g + fg'
     Addition& differentiate() const override{
-        Addition a = Multiply(f.differentiate(), g) + Multiply(f, g.differentiate());
-        return a;
+        static Addition derivative = f.differentiate() * g + f * g.differentiate();
+        return derivative;
     }
 
     Multiply(const Multiply& other): f(*other.f.clone()), g(*other.g.clone()){}
