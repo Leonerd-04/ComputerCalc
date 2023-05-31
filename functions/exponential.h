@@ -29,6 +29,11 @@ public:
     Function& differentiate() const override{
         return log(base) * *this;
     }
+
+
+    Exponential* clone() const override{
+        return new Exponential(base);
+    }
 };
 
 class Power : public Function{
