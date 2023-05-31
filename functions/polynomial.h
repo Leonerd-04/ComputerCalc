@@ -14,7 +14,6 @@ class Polynomial : public Function {
     std::vector<double> coefficients;
 
     public:
-
     Polynomial(const std::vector<double> coefficients): coefficients(coefficients) {}
 
     Polynomial(std::initializer_list<double> list) : coefficients(list){}
@@ -75,6 +74,14 @@ class Polynomial : public Function {
         return result.str();
     }
 
+
+    Polynomial(const Polynomial& other){
+        this->coefficients = other.coefficients;
+    }
+
+   Polynomial* clone() const override{
+        return new Polynomial(*this);
+    };
 };
 
 

@@ -16,8 +16,7 @@ public:
     virtual std::string to_string(Function* func) const = 0;
     virtual Function& differentiate() const = 0;
 
-    // virtual Function* create() const = 0;
-    // virtual Function* clone() const = 0;
+    virtual Function* clone() const = 0;
 
     // Essentially gives to_string a default value
     std::string to_string() const {
