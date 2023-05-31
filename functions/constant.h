@@ -6,6 +6,7 @@
 #define FUNCTIONS_CONSTANT_H
 
 #include "function.h"
+#include "combinations/multiply.h"
 
 // Useful to not need to make special cases with other classes
 class Constant : public Function {
@@ -34,5 +35,9 @@ public:
     }
 };
 
+
+Multiply& operator*(const double c, const Function& f){
+    return *new Multiply(Constant(c), f);
+}
 
 #endif //FUNCTIONS_CONSTANT_H
