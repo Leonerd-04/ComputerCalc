@@ -35,7 +35,7 @@ public:
     }
 };
 
-
+// Makes multiplying by constants easier
 Multiply& operator*(const double c, const Function& f){
     return *new Multiply(Constant(c), f);
 }

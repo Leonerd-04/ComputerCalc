@@ -33,7 +33,7 @@ class Polynomial : public Function {
         std::vector<double> newCoef;
 
         for(int i = 1; i < coefficients.size(); i++){
-            newCoef.push_back(coefficients[i] * i);
+            newCoef.push_back(coefficients[i] * i); // Power rule is x^n -> n * x^{n - 1}
         }
 
         return *new Polynomial(newCoef);

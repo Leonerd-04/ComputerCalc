@@ -12,6 +12,7 @@
 #include <cmath>
 #include <typeinfo>
 
+// Exponential function with a constant base
 class Exponential : public Function{
     double base;
 public:
@@ -27,7 +28,7 @@ public:
     }
 
     Function& differentiate() const override{
-        return log(base) * *this;
+        return log(base) * *this; // Chain rule for exponentials
     }
 
 
@@ -36,6 +37,7 @@ public:
     }
 };
 
+// Power, with constant exponent and non-constant base, i.e. x^3
 class Power : public Function{
     double power;
 public:
@@ -49,8 +51,9 @@ public:
         std::string x = func == nullptr ? "x" :  "(" + func->to_string() + ")";
         return x + "^" + std::to_string(power);
     }
+
     Multiply& differentiate() const override{
-        return power * Power(power - 1);
+        return power * Power(power - 1); // Power rule
     }
 
     Power(const Power& other) : power(other.power){}

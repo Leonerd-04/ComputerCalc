@@ -21,7 +21,7 @@ public:
     }
 
     Function& differentiate() const override {
-        return *new Power(-1);
+        return *new Power(-1); // dln(x)/dx -> 1/x
     }
 
     Function* clone() const override{

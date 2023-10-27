@@ -40,7 +40,7 @@ public:
     }
 };
 
-
+// For two functions f and g, f + g produces a new function that returns their sum
 Addition& operator+(const Function& f, const Function& g){
     return *new Addition(f, g);
 }

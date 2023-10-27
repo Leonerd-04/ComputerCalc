@@ -42,6 +42,7 @@ public:
 
 };
 
+// f * g returns a function multiplying them together
 Multiply& operator*(const Function& f, const Function& g){
     return *new Multiply(f, g);
 }
