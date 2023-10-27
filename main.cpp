@@ -3,6 +3,7 @@
 #include "functions/polynomial.h"
 #include "functions/exponential.h"
 #include "functions/combinations/of.h"
+#include "functions/trig.h"
 
 int main() {
     Polynomial p({10, 3, 4});
@@ -23,4 +24,12 @@ int main() {
     std::cout << "e^8 is " << ex3(2) << std::endl;
     std::cout << "The derivative of " << ex3 << " is " << ex3.differentiate() << std::endl;
     std::cout << "The slope of the graph at x = 1 is " << ex3.differentiate()(1) << std::endl;
+
+    Of c = Cos()(Power(2)); // cos(x²)
+
+    std::cout << c << std::endl;
+    std::cout << "cos(4) is " << c(2) << std::endl;
+    std::cout << "The derivative of " << c << " is " << c.differentiate() << std::endl;
+    std::cout << "The slope of the graph at x = pi is " << ex3.differentiate()(M_1_PIf) << std::endl;
+
 }
